@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo " my build start..."
+      - zip -r mydeploy.zip lambda_function.py
+
+    post_build:
+      commands:
+        - echo "deploy lambda function"
+        - aws lambda update-function-code --function-name test-func1 --zip-file://mydeploy.zip
